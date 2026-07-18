@@ -146,7 +146,7 @@ return (
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {images.map((image, index) => (
-            <div key={index} className="overflow-hidden rounded-xl border border-slate-200 bg-white">
+            <div key={image.id} className="overflow-hidden rounded-xl border border-slate-200 bg-white">
               <div className="relative flex h-40 items-center justify-center bg-slate-100">
                 {image.url && !failedImages.has(image.id) ? (
                   <img
