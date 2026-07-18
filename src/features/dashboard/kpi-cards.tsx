@@ -63,7 +63,7 @@ export function KpiCards({ metrics, isLoading }: KpiCardsProps) {
                   <Skeleton className="mt-2 h-7 w-16" />
                 ) : (
                   <p className="mt-1 text-2xl font-bold tracking-tight text-slate-900">
-                    {card.value}
+                    {card.value.toLocaleString()}
                   </p>
                 )}
               </div>
