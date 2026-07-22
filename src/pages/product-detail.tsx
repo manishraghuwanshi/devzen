@@ -12,6 +12,24 @@ import { availableQuantity } from "../features/products/product-types.ts";
 import { useAuth } from "../features/auth/use-auth.ts";
 import { formatMoney } from "../lib/money.ts";
 import { ApiError } from "../lib/api-error.ts";
+import type { ProductWatchDetails } from "../types/models.ts";
+
+const WATCH_FIELDS: { key: keyof ProductWatchDetails; label: string }[] = [
+  { key: "watchType", label: "Type" },
+  { key: "movement", label: "Movement" },
+  { key: "caseMaterial", label: "Case material" },
+  { key: "caseShape", label: "Case shape" },
+  { key: "caseDiameter", label: "Case diameter" },
+  { key: "caseThickness", label: "Case thickness" },
+  { key: "strapMaterial", label: "Strap material" },
+  { key: "strapColor", label: "Strap colour" },
+  { key: "dialColor", label: "Dial colour" },
+  { key: "glassMaterial", label: "Glass material" },
+  { key: "waterResistance", label: "Water resistance" },
+  { key: "powerReserve", label: "Power reserve" },
+  { key: "warrantyPeriod", label: "Warranty" },
+  { key: "gender", label: "Gender" },
+];
 
 function errorText(error: unknown, fallback = "Please try again."): string {
   return error instanceof ApiError ? error.message : fallback;
@@ -158,6 +176,36 @@ export default function ProductDetailPage() {
 
       <ProductImages productId={data.id} canManage={hasPermission("images.manage")} />
 
+      {data.watchDetails && (
+        <Card>
+          <CardHeader title="Watch specifications" subtitle="Horology details" />
+          <div className="grid gap-4 text-sm sm:grid-cols-2 lg:grid-cols-3">
+            {WATCH_FIELDS.map(({ key, label }) => {
+              const value = data.watchDetails?.[key];
+
+              return value == null || value === "" ? null : (
+                <Detail key={key} label={label} value={String(value)} />
+              );
+            })}
+          </div>
+          {data.watchDetails.additionalSpecifications &&
+            Object.keys(data.watchDetails.additionalSpecifications).length > 0 && (
+              <div className="mt-4 border-t border-slate-100 pt-4">
+                <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-500">
+                  Additional specifications
+                </p>
+                <dl className="grid gap-2 text-sm sm:grid-cols-2">
+                  {Object.entries(data.watchDetails.additionalSpecifications).map(([key, value]) => (
+                    <div key={key} className="flex justify-between gap-4">
+                      <dt className="text-slate-500">{key}</dt>
+                      <dd className="font-medium text-slate-800">{String(value)}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            )}
+        </Card>
+      )}
     </div>
   );
 }
