@@ -275,6 +275,29 @@ export default function InventoryPage() {
               onRetry={() => inventoryQuery.refetch()}
             />
           </div>
+        ) : rows.length === 0 ? (
+          <div className="p-6">
+            <EmptyState
+              icon={<FiArchive className="h-8 w-8 text-slate-400" />}
+              title={hasFilters ? "No inventory matches these filters" : "No inventory yet"}
+              description={
+                hasFilters
+                  ? "Adjust or reset the filters to widen the search."
+                  : "Inventory records are created automatically when you add a product."
+              }
+              action={
+                hasFilters ? (
+                  <Button variant="outline" size="sm" onClick={resetFilters}>
+                    Reset filters
+                  </Button>
+                ) : (
+                  <Link to="/products">
+                    <Button size="sm">Go to products</Button>
+                  </Link>
+                )
+              }
+            />
+          </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full min-w-220 text-left text-sm">
