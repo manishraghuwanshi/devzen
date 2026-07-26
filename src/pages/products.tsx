@@ -314,6 +314,30 @@ return (
               onRetry={() => productsQuery.refetch()}
             />
           </div>
+        ) : rows.length === 0 ? (
+          <div className="p-6">
+            <EmptyState
+              title={hasFilters ? "No products match these filters" : "No products yet"}
+              description={
+                hasFilters
+                  ? "Adjust or reset the filters to widen the search."
+                  : "Create the first product to populate the catalog."
+              }
+              action={
+                hasFilters ? (
+                  <Button variant="outline" size="sm" onClick={resetFilters}>
+                    Reset filters
+                  </Button>
+                ) : hasPermission("products.write") ? (
+                  <Link to="/products/new">
+                    <Button size="sm" leftIcon={<FiPlus className="h-4 w-4" />}>
+                      New Product
+                    </Button>
+                  </Link>
+                ) : undefined
+              }
+            />
+          </div>
         ) : (
           <ProductTable
             products={rows}
