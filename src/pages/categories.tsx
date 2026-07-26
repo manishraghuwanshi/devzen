@@ -272,6 +272,29 @@ export default function CategoriesPage() {
               onRetry={() => categoriesQuery.refetch()}
             />
           </div>
+        ) : rows.length === 0 ? (
+          <div className="p-6">
+            <EmptyState
+              icon={<FiFolder className="h-8 w-8 text-slate-400" />}
+              title={hasFilters ? "No categories match these filters" : "No categories yet"}
+              description={
+                hasFilters
+                  ? "Adjust or reset the filters to widen the search."
+                  : "Create the first category to organise your catalog."
+              }
+              action={
+                hasFilters ? (
+                  <Button variant="outline" size="sm" onClick={resetFilters}>
+                    Reset filters
+                  </Button>
+                ) : (
+                  <Button size="sm" leftIcon={<FiPlus className="h-4 w-4" />} onClick={openCreate}>
+                    New Category
+                  </Button>
+                )
+              }
+            />
+          </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full min-w-200 text-left text-sm">
