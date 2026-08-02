@@ -178,6 +178,25 @@ export default function AuditLogsPage() {
               onRetry={() => logsQuery.refetch()}
             />
           </div>
+        ) : logs.length === 0 ? (
+          <div className="p-6">
+            <EmptyState
+              icon={<FiActivity className="h-8 w-8 text-slate-400" />}
+              title={hasFilters ? "No audit entries match these filters" : "No audit activity yet"}
+              description={
+                hasFilters
+                  ? "Adjust or reset the filters to widen the search."
+                  : "Security and catalog actions will appear here as they happen."
+              }
+              action={
+                hasFilters ? (
+                  <Button variant="outline" size="sm" onClick={resetFilters}>
+                    Reset filters
+                  </Button>
+                ) : undefined
+              }
+            />
+          </div>
         ) : (
           <AuditLogTable logs={logs} />
         )}
