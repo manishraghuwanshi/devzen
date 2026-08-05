@@ -42,6 +42,12 @@ export function RecentActivity() {
             </div>
           ))}
         </div>
+      ) : !logs || logs.length === 0 ? (
+        <EmptyState
+          icon={<FiActivity className="h-6 w-6 text-slate-400" />}
+          title="No Recent Activity"
+          description="Administrative mutations and logins will appear here."
+        />
       ) : (
         <div className="divide-y divide-slate-100">
           {logs.map((log) => (
