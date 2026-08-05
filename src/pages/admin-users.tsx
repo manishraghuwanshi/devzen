@@ -286,6 +286,29 @@ export default function AdminUsersPage() {
               onRetry={() => usersQuery.refetch()}
             />
           </div>
+        ) : rows.length === 0 ? (
+          <div className="p-6">
+            <EmptyState
+              icon={<FiUsers className="h-8 w-8 text-slate-400" />}
+              title={hasFilters ? "No admin users match these filters" : "No admin users yet"}
+              description={
+                hasFilters
+                  ? "Adjust or reset the filters to widen the search."
+                  : "Create the first administrator account."
+              }
+              action={
+                hasFilters ? (
+                  <Button variant="outline" size="sm" onClick={resetFilters}>
+                    Reset filters
+                  </Button>
+                ) : canManage ? (
+                  <Button size="sm" leftIcon={<FiPlus className="h-4 w-4" />} onClick={openCreate}>
+                    New Admin
+                  </Button>
+                ) : undefined
+              }
+            />
+          </div>
         ) : (
           <AdminUserTable
             users={rows}
