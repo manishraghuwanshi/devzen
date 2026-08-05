@@ -24,12 +24,12 @@ export function AuditLogTable({ logs }: AuditLogTableProps) {
           </tr>
         </thead>
         <tbody>
-          {logs.map((log, index) => {
+          {logs.map((log) => {
             const expanded = expandedId === log.id;
             const hasPayload = log.metadata !== null && log.metadata !== undefined;
 
             return (
-              <Fragment key={index}>
+              <Fragment key={log.id}>
                 <tr className="border-b border-slate-100 last:border-0">
                   <td className="px-3 py-4 text-slate-500">
                     {new Date(log.createdAt).toLocaleString()}
