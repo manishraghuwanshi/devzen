@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { FiPlus, FiTag, FiFolder, FiUsers } from "react-icons/fi";
+import { FiPlus, FiTag, FiFolder, FiArchive, FiUsers } from "react-icons/fi";
 import { Card, CardHeader } from "../../components/ui/card.tsx";
 import { Button } from "../../components/ui/button.tsx";
 import { useAuth } from "../auth/use-auth.ts";
@@ -25,6 +25,12 @@ export function QuickActions() {
       path: "/categories",
       icon: FiFolder,
       visible: hasPermission("categories.manage"),
+    },
+    {
+      label: "Manage Inventory",
+      path: "/inventory",
+      icon: FiArchive,
+      visible: hasPermission("inventory.read"),
     },
     {
       label: "Manage Admin Users",
