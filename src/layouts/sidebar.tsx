@@ -142,6 +142,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
                 key={item.path}
                 to={item.path}
                 end={item.path === "/"}
+                onClick={() => onClose()}
                 className={({ isActive }) =>
                   `flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
                     isActive
