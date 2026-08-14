@@ -6,6 +6,8 @@ import { useAuth } from "../features/auth/use-auth.ts";
 export default function ProfilePage() {
   const { user } = useAuth();
 
+  if (!user) return null;
+
   return (
     <div className="max-w-3xl space-y-6">
       <div>
