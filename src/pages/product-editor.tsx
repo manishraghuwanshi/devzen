@@ -78,16 +78,16 @@ export default function ProductEditorPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-wrap items-center justify-between gap-2">
-        <h1 className="text-2xl font-bold text-slate-900">
-          {editing ? "Edit product" : "Add product"}
-        </h1>
+      <div>
         <Link
           to={editing ? `/products/${id}` : "/products"}
           className="text-sm text-blue-600 hover:underline"
         >
           ← Back to products
         </Link>
+        <h1 className="mt-2 text-2xl font-bold text-slate-900">
+          {editing ? "Edit product" : "Add product"}
+        </h1>
       </div>
 
       {mutation.isError && (
