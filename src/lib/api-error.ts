@@ -22,4 +22,24 @@ export class ApiError extends Error {
   get isUnauthorized(): boolean {
     return this.status === 401;
   }
+
+  get isForbidden(): boolean {
+    return this.status === 403;
+  }
+
+  get isNotFound(): boolean {
+    return this.status === 404;
+  }
+
+  get isConflict(): boolean {
+    return this.status === 409;
+  }
+
+  get isValidationError(): boolean {
+    return this.status === 400 && this.code === "VALIDATION_ERROR";
+  }
+
+  get isRateLimited(): boolean {
+    return this.status === 429;
+  }
 }
