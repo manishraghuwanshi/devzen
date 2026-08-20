@@ -23,6 +23,10 @@ const emptyProduct: ProductFormValues = { brandId: "", name: "", slug: "", sku: 
 /** Currencies offered in the picker; any other stored code is appended at runtime. */
 
 export function ProductForm({ initialValues = emptyProduct, brands, categories, onSubmit, submitting, submitLabel }: { initialValues?: ProductFormValues; brands: Brand[]; categories: Category[]; onSubmit: (values: ProductFormValues) => void; submitting: boolean; submitLabel: string }) {
+  // React Compiler memoises `register()`'s change/blur handlers together with the
+  // values they close over, so react-hook-form ends up reading stale values and Zod
+  // reports required fields as empty. Opt this form out of compilation.
+  "use no memo";
   const { register, handleSubmit, reset, getValues, setValue, formState: { errors } } = useForm<ProductFormValues>({ resolver: zodResolver(schema) as unknown as Resolver<ProductFormValues>, defaultValues: initialValues });
   useEffect(() => reset(initialValues), [initialValues, reset]);
   const makeSlug = () => {
