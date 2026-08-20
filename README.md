@@ -31,3 +31,19 @@ with `credentials: "include"`, so the API must allow this origin through CORS.
 | `pnpm build` | Type-check (`tsc -b`) then production build |
 | `pnpm lint` | Oxlint |
 | `pnpm preview` | Serve the production build |
+
+## Documentation
+
+- [`docs/frontend-architecture.md`](docs/frontend-architecture.md) - how the app is put together
+- [`docs/backend-integration.md`](docs/backend-integration.md) - endpoints and response envelopes
+- [`docs/permission-map.md`](docs/permission-map.md) - permissions mapped to UI actions
+
+## Notes
+
+- React Compiler is enabled. Forms built on React Hook Form carry a function-level
+  `"use no memo"` directive because the compiler's memoisation of `register()` handlers
+  produced stale values; see the comments in `src/features/**/*-form.tsx`.
+- Prices arrive from the API in whole currency units and are rendered by
+  `src/lib/money.ts` with no scaling.
+- Frontend permission checks exist for UX only. Authorisation is enforced by the backend
+  on every request.
