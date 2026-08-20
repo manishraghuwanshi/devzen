@@ -47,6 +47,10 @@ export function SetStockForm({
   submitting: boolean;
   onCancel: () => void;
 }) {
+  // React Compiler memoises `register()`'s change/blur handlers together with the
+  // values they close over, so react-hook-form can end up reading stale values. The
+  // same opt-out is applied to every RHF form in this project.
+  "use no memo";
   const {
     register,
     handleSubmit,
@@ -94,6 +98,8 @@ export function AdjustStockForm({
   submitting: boolean;
   onCancel: () => void;
 }) {
+  // See `SetStockForm` above for why this form opts out of React Compiler.
+  "use no memo";
   const {
     register,
     handleSubmit,
