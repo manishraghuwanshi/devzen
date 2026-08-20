@@ -30,6 +30,7 @@ export function AdminUserTable({
             <th className="px-3 py-3">Role</th>
             <th className="px-3 py-3">Status</th>
             <th className="px-3 py-3">Active Sessions</th>
+            <th className="px-3 py-3">Last Login</th>
             <th className="px-3 py-3">Created</th>
             <th className="px-3 py-3 text-right">Actions</th>
           </tr>
@@ -52,6 +53,9 @@ export function AdminUserTable({
                 </Badge>
               </td>
               <td className="px-3 py-4 text-slate-600">{user.activeSessionCount}</td>
+              <td className="px-3 py-4 text-slate-500">
+                {user.lastLoginAt ? new Date(user.lastLoginAt).toLocaleString() : "Never"}
+              </td>
               <td className="px-3 py-4 text-slate-500">
                 {new Date(user.createdAt).toLocaleDateString()}
               </td>
