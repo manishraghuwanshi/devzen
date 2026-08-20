@@ -82,6 +82,10 @@ export function CategoryForm({
   submitLabel: string;
   onCancel: () => void;
 }) {
+  // React Compiler memoises `register()`'s change/blur handlers together with the
+  // values they close over, so react-hook-form ends up reading stale values and Zod
+  // reports required fields as empty. Opt this form out of compilation.
+  "use no memo";
   const initialValues = useMemo<CategoryFormValues>(
     () => (category ? categoryToFormValues(category) : emptyValues),
     [category],
